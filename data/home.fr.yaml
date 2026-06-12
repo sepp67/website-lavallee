@@ -1,54 +1,131 @@
 # data/home.fr.yaml
-brand_subtitle: "Open Source Infrastructure"
-
+meta:
+  title_suffix: Infrastructure Open Source
+  description: 'Infrastructure Linux auto-hébergée : Proxmox, Docker, Ansible, monitoring, séparation production/staging et documentation technique.'
+brand_subtitle: Infrastructure Open Source
 nav:
-  infrastructure: "Infrastructure"
-  projects: "Projets"
-  notes: "Notes techniques"
-  contact: "Contact"
-
+  aria_label: Navigation principale
+  infrastructure: Infrastructure
+  projects: Projets
+  notes: Notes techniques
+  contact: Contact
+language_switch:
+  aria_label: Sélecteur de langue
 hero:
-  eyebrow: "Linux en production • Auto-hébergement • Automatisation"
-  title: "Ceci est une<br>infrastructure de production auto-hébergée !"
-  lead_1: "Lavallee.tech documente la conception, l’exploitation et l’évolution d’une infrastructure Linux auto-hébergée."
-  lead_2: "Ce site sert à la fois de journal d’ingénierie et de portfolio public de projets d’infrastructure : hôtes Proxmox, services Docker, automatisation Ansible, monitoring, reverse proxies, accès VPN et outils collaboratifs open source."
-  primary_button: "Voir l’infrastructure"
-  secondary_button: "Lire les notes techniques"
-
+  eyebrow: Linux en production • Auto-hébergement • Automatisation
+  title: Ceci est une<br>infrastructure de production auto-hébergée !
+  lead_1: Lavallee.tech documente la conception, l’exploitation et l’évolution d’une infrastructure Linux auto-hébergée.
+  lead_2: 'Ce site sert à la fois de journal d’ingénierie et de portfolio public de projets d’infrastructure : hôtes Proxmox, services Docker, automatisation Ansible, monitoring, reverse proxies, accès VPN et outils collaboratifs open source.'
+  primary_button: Voir l’infrastructure
+  secondary_button: Lire les notes techniques
+stack:
+  aria_label: Stack technique
+  items:
+  - Proxmox
+  - Debian
+  - Docker
+  - Ansible
+  - Caddy
+  - Prometheus
+  - Grafana
+  - Loki
+  - WireGuard
 terminal:
-  aria_label: "Résumé de l’infrastructure"
-  command: "ansible-playbook site-production.yml"
+  aria_label: Résumé de l’infrastructure
+  command: ansible-playbook site-production.yml
   lines:
-    - "# initialiser les hôtes Linux"
-    - "# déployer les services Docker"
-    - "# configurer les reverse proxies"
-    - "# publier les cibles de monitoring"
-  status: "production séparée du staging"
-  focus: "fiabilité, observabilité, documentation"
-  stack: "Linux, Proxmox, Docker and Ansible"
-
+  - '# initialiser les hôtes Linux'
+  - '# déployer les services Docker'
+  - '# configurer les reverse proxies'
+  - '# publier les cibles de monitoring'
+  labels:
+    status: statut
+    focus: objectif
+    stack: stack utilisée
+  status: production séparée du staging
+  focus: fiabilité, observabilité, documentation
+  stack: Linux, Proxmox, Docker et Ansible
 infrastructure:
-  title: "Architecture de l’infrastructure"
-  intro: "Un vrai projet de restructuration d’infrastructure : séparer les charges critiques de production du staging, du laboratoire et des travaux de migration."
-
+  title: Architecture de l’infrastructure
+  intro: 'Un vrai projet de restructuration d’infrastructure : séparer les charges critiques de production du staging, du laboratoire et des travaux de migration.'
+  nodes:
+  - title: Nœud de production
+    subtitle: Dell OptiPlex 3040 — services critiques
+    items:
+    - Mail
+    - Nextcloud
+    - Matrix
+    - Reverse proxy
+  - title: Nœud staging / laboratoire
+    subtitle: Dell OptiPlex 7010 — tests et automatisation
+    items:
+    - Applications staging
+    - Monitoring
+    - Tests CI/CD
+    - Travaux de migration
+  - title: Couche opérationnelle
+    subtitle: Ansible, Docker, Caddy, Prometheus, Grafana, Loki, WireGuard
+  steps:
+  - title: Séparer la production et le staging
+    text: Passer d’un hôte unique surchargé à une architecture Proxmox plus claire sur deux nœuds, avec des frontières opérationnelles explicites.
+  - title: Réduire la complexité Ansible
+    text: 'Découper les gros playbooks en dépôts et rôles plus petits : fondation, services de plateforme et applications.'
+  - title: Migrer les services hérités
+    text: Remplacer certains services YunoHost par des stacks Docker documentées, tout en conservant les sauvegardes et la visibilité opérationnelle.
+  - title: Tout documenter
+    text: Transformer les runbooks, incidents, schémas et notes de déploiement en documentation technique publique.
 projects:
-  title: "Projets"
-  intro: "Sélection de projets d’infrastructure et d’application montrant un travail concret d’ingénierie Linux."
-
+  title: Projets
+  intro: Sélection de projets d’infrastructure et d’application montrant un travail concret d’ingénierie Linux.
+  cards:
+  - title: Infrastructure DevOps staging / production
+    text: Projet d’automatisation d’infrastructure pour déployer des applications dans des environnements séparés avec Ansible, Docker et des reverse proxies.
+    items:
+    - Registre des projets
+    - Déploiement d’images Docker
+    - Health checks
+    - Cibles de monitoring
+    links:
+    - label: GitHub
+      url: https://github.com/sepp67/devops_staging_prod_infra
+      primary: false
+  - title: Stack collaborative auto-hébergée
+    text: Chemin de migration depuis des services basés sur YunoHost vers des déploiements Docker pour Matrix et Nextcloud.
+    items:
+    - Volumes persistants
+    - Intégration reverse proxy
+    - Sauvegardes
+    - Runbooks d’exploitation
+    links:
+    - label: GitHub
+      url: https://github.com/sepp67/ansible-role-nextcloud-stack
+      primary: false
+  - title: Démo de facturation électronique française
+    text: Prototype d’application orientée Factur-X / PDP pour démontrer la génération structurée de factures électroniques.
+    items:
+    - FastAPI
+    - Publication d’image Docker
+    - Génération Factur-X
+    - Intégration API
+    links:
+    - label: Démonstration
+      url: https://facturier.lavallee.tech
+      primary: true
+    - label: GitHub
+      url: https://github.com/sepp67/ansible-role-facturier_demo
+      primary: false
 notes:
-  title: "Notes techniques"
-  intro: "Articles sur les décisions d’architecture, les migrations, les incidents opérationnels et la conception d’infrastructure."
-  read_button: "Lire l’article"
-
+  title: Notes techniques
+  intro: Articles sur les décisions d’architecture, les migrations, les incidents opérationnels et la conception d’infrastructure.
+  read_button: Lire l’article
 contact:
-  title: "Travaillons ensemble"
-  intro: "Cette plateforme présente mon travail d’ingénierie Linux, mes projets d’infrastructure et mes notes techniques. Elle s’adresse à la fois aux recruteurs, aux associations et PME locales qui cherchent des solutions open source."
-  recruiter_title: "Recruteurs & équipes techniques"
-  recruiter_text: "Vous venez de LinkedIn ou GitHub ? Consultez mes projets, articles techniques et choix d’architecture pour comprendre comment je conçois, automatise et exploite des infrastructures Linux."
-  recruiter_button: "Explorer les projets"
-  local_title: "Petites entreprises & associations"
-  local_text: "Vous cherchez un Nextcloud, un VPN, des serveurs Linux, des sauvegardes ou des alternatives open source aux services cloud ? Je peux aider à concevoir et déployer des solutions simples, durables et bien documentées."
-  local_button: "Me contacter"
-
+  title: Travaillons ensemble
+  intro: Cette plateforme présente mon travail d’ingénierie Linux, mes projets d’infrastructure et mes notes techniques. Elle s’adresse à la fois aux recruteurs, aux associations et PME locales qui cherchent des solutions open source.
+  recruiter_title: Recruteurs & équipes techniques
+  recruiter_text: Vous venez de LinkedIn ou GitHub ? Consultez mes projets, articles techniques et choix d’architecture pour comprendre comment je conçois, automatise et exploite des infrastructures Linux.
+  recruiter_button: Explorer les projets
+  local_title: Petites entreprises & associations
+  local_text: Vous cherchez un Nextcloud, un VPN, des serveurs Linux, des sauvegardes ou des alternatives open source aux services cloud ? Je peux aider à concevoir et déployer des solutions simples, durables et bien documentées.
+  local_button: Me contacter
 footer:
-  text: "Linux • Open Source • Ingénierie Infrastructure"
+  text: Linux • Open Source • Ingénierie infrastructure

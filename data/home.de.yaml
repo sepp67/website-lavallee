@@ -1,55 +1,131 @@
 # data/home.de.yaml
-brand_subtitle: "Open Source Infrastructure"
-
+meta:
+  title_suffix: Open-Source-Infrastruktur
+  description: 'Selbst gehostete Linux-Infrastruktur: Proxmox, Docker, Ansible, Monitoring, Trennung von Produktion und Staging sowie technische Dokumentation.'
+brand_subtitle: Open-Source-Infrastruktur
 nav:
-  infrastructure: "Infrastruktur"
-  projects: "Projekte"
-  notes: "Engineering Notes"
-  contact: "Kontakt"
-
+  aria_label: Hauptnavigation
+  infrastructure: Infrastruktur
+  projects: Projekte
+  notes: Technische Notizen
+  contact: Kontakt
+language_switch:
+  aria_label: Sprachauswahl
 hero:
-  eyebrow: "Produktions-Linux • Self-Hosting • Automatisierung"
-  title: "Das ist eine<br>selbst gehostete Webhosting Infrastruktur!"
-  lead_1: "Lavallee.tech dokumentiert den Entwurf, den Betrieb und die Weiterentwicklung einer selbst gehosteten Linux-Infrastruktur."
-  lead_2: "Diese Website dient zugleich als Engineering-Journal und als öffentliches Portfolio für Infrastrukturprojekte: Proxmox-Hosts, Docker-Services, Ansible-Automatisierung, Monitoring, Reverse Proxies, VPN-Zugänge und Open-Source-Kollaborationstools."
-  primary_button: "Infrastruktur ansehen"
-  secondary_button: "Engineering Notes lesen"
-
+  eyebrow: Produktions-Linux • Self-Hosting • Automatisierung
+  title: Das ist eine<br>selbst gehostete Hostinginfrastruktur!
+  lead_1: Lavallee.tech dokumentiert den Entwurf, den Betrieb und die Weiterentwicklung einer selbst gehosteten Linux-Infrastruktur.
+  lead_2: 'Diese Website dient zugleich als Engineering-Journal und als öffentliches Portfolio für Infrastrukturprojekte: Proxmox-Hosts, Docker-Services, Ansible-Automatisierung, Monitoring, Reverse Proxies, VPN-Zugänge und Open-Source-Kollaborationstools.'
+  primary_button: Infrastruktur ansehen
+  secondary_button: Technische Notizen lesen
+stack:
+  aria_label: Technologie-Stack
+  items:
+  - Proxmox
+  - Debian
+  - Docker
+  - Ansible
+  - Caddy
+  - Prometheus
+  - Grafana
+  - Loki
+  - WireGuard
 terminal:
-  aria_label: "Infrastrukturübersicht"
-  command: "ansible-playbook site-production.yml"
+  aria_label: Infrastrukturübersicht
+  command: ansible-playbook site-production.yml
   lines:
-    - "# Linux-Hosts initialisieren"
-    - "# Docker-Services bereitstellen"
-    - "# Reverse Proxies konfigurieren"
-    - "# Monitoring-Targets veröffentlichen"
-  status: "Produktion von Staging getrennt"
-  focus: "Zuverlässigkeit, Observability, Dokumentation"
-  stack: "Linux, Proxmox, Docker and Ansible"
-
+  - '# Linux-Hosts initialisieren'
+  - '# Docker-Services bereitstellen'
+  - '# Reverse Proxies konfigurieren'
+  - '# Monitoring-Ziele veröffentlichen'
+  labels:
+    status: Status
+    focus: Fokus
+    stack: verwendeter Stack
+  status: Produktion von Staging getrennt
+  focus: Zuverlässigkeit, Observability, Dokumentation
+  stack: Linux, Proxmox, Docker und Ansible
 infrastructure:
-  title: "Infrastrukturarchitektur"
-  intro: "Ein reales Restrukturierungsprojekt: kritische Produktions-Workloads werden von Staging-, Lab- und Migrationsarbeiten getrennt."
-
+  title: Infrastrukturarchitektur
+  intro: 'Ein reales Restrukturierungsprojekt: kritische Produktions-Workloads werden von Staging-, Labor- und Migrationsarbeiten getrennt.'
+  nodes:
+  - title: Produktionsknoten
+    subtitle: Dell OptiPlex 3040 — kritische Dienste
+    items:
+    - Mail
+    - Nextcloud
+    - Matrix
+    - Reverse Proxy
+  - title: Staging- / Laborknoten
+    subtitle: Dell OptiPlex 7010 — Tests und Automatisierung
+    items:
+    - Staging-Anwendungen
+    - Monitoring
+    - CI/CD-Tests
+    - Migrationsarbeiten
+  - title: Betriebsschicht
+    subtitle: Ansible, Docker, Caddy, Prometheus, Grafana, Loki, WireGuard
+  steps:
+  - title: Produktion und Staging trennen
+    text: Wechsel von einem einzelnen überlasteten Host zu einer klareren Proxmox-Architektur mit zwei Knoten und expliziten betrieblichen Grenzen.
+  - title: Ansible-Komplexität reduzieren
+    text: 'Große Playbooks in kleinere Repositories und Rollen aufteilen: Foundation, Plattformdienste und Anwendungen.'
+  - title: Legacy-Dienste migrieren
+    text: Ausgewählte YunoHost-Dienste durch dokumentierte Docker-Stacks ersetzen und dabei Backups sowie betriebliche Sichtbarkeit erhalten.
+  - title: Alles dokumentieren
+    text: Runbooks, Incidents, Diagramme und Deployment-Notizen in öffentliche technische Dokumentation überführen.
 projects:
-  title: "Projekte"
-  intro: "Ausgewählte Infrastruktur- und Anwendungsprojekte, die praktische Linux-Engineering-Arbeit zeigen."
-
+  title: Projekte
+  intro: Ausgewählte Infrastruktur- und Anwendungsprojekte, die praktische Linux-Engineering-Arbeit zeigen.
+  cards:
+  - title: DevOps-Infrastruktur für Staging und Produktion
+    text: Infrastruktur-Automatisierungsprojekt zur Bereitstellung von Anwendungen in getrennten Umgebungen mit Ansible, Docker und Reverse Proxies.
+    items:
+    - Projekt-Registry
+    - Bereitstellung von Docker-Images
+    - Health Checks
+    - Monitoring-Ziele
+    links:
+    - label: GitHub
+      url: https://github.com/sepp67/devops_staging_prod_infra
+      primary: false
+  - title: Selbst gehosteter Kollaborations-Stack
+    text: Migrationspfad von YunoHost-basierten Diensten zu Docker-basierten Matrix- und Nextcloud-Deployments.
+    items:
+    - Persistente Volumes
+    - Reverse-Proxy-Integration
+    - Backups
+    - Betriebs-Runbooks
+    links:
+    - label: GitHub
+      url: https://github.com/sepp67/ansible-role-nextcloud-stack
+      primary: false
+  - title: Demo für französische E-Rechnung
+    text: Factur-X- / PDP-orientierter Anwendungsprototyp zur Demonstration strukturierter elektronischer Rechnungserzeugung.
+    items:
+    - FastAPI
+    - Veröffentlichung von Docker-Images
+    - Factur-X-Erzeugung
+    - API-Integration
+    links:
+    - label: Demo öffnen
+      url: https://facturier.lavallee.tech
+      primary: true
+    - label: GitHub
+      url: https://github.com/sepp67/ansible-role-facturier_demo
+      primary: false
 notes:
-  title: "Engineering Notes"
-  intro: "Längere Notizen zu Architekturentscheidungen, Migrationen, betrieblichen Vorfällen und Infrastrukturdesign."
-  read_button: "Artikel lesen"
-
+  title: Technische Notizen
+  intro: Längere Notizen zu Architekturentscheidungen, Migrationen, betrieblichen Vorfällen und Infrastrukturdesign.
+  read_button: Artikel lesen
 contact:
-  title: "Wir können zusammenarbeiten"
-  intro: "Diese Plattform zeigt meine Linux-Engineering-Arbeit, Infrastrukturprojekte und technischen Notizen. Sie richtet sich sowohl an Recruiter als auch an lokale Organisationen, die praktische Open-Source-Lösungen suchen."
-  recruiter_title: "Recruiter & technische Teams"
-  recruiter_text: "Kommen Sie von LinkedIn oder GitHub? Sehen Sie sich meine Projekte, technischen Artikel und Architekturentscheidungen an, um zu verstehen, wie ich Linux-Infrastrukturen entwerfe, automatisiere und betreibe."
-  recruiter_button: "Projekte ansehen"
-  local_title: "Kleine Unternehmen & Vereine"
-  local_text: "Suchen Sie Nextcloud, VPN, Linux-Server, Backup-Lösungen oder Open-Source-Alternativen zu Cloud-Diensten? Ich kann helfen, einfache, nachhaltige und gut dokumentierte Lösungen zu entwerfen und bereitzustellen."
-  local_button: "Kontakt aufnehmen"
-
+  title: Zusammenarbeiten
+  intro: Diese Plattform zeigt meine Linux-Engineering-Arbeit, Infrastrukturprojekte und technischen Notizen. Sie richtet sich sowohl an Recruiter als auch an lokale Organisationen, die praktische Open-Source-Lösungen suchen.
+  recruiter_title: Recruiter & technische Teams
+  recruiter_text: Kommen Sie von LinkedIn oder GitHub? Sehen Sie sich meine Projekte, technischen Artikel und Architekturentscheidungen an, um zu verstehen, wie ich Linux-Infrastrukturen entwerfe, automatisiere und betreibe.
+  recruiter_button: Projekte ansehen
+  local_title: Kleine Unternehmen & Vereine
+  local_text: Suchen Sie Nextcloud, VPN, Linux-Server, Backup-Lösungen oder Open-Source-Alternativen zu Cloud-Diensten? Ich kann helfen, einfache, nachhaltige und gut dokumentierte Lösungen zu entwerfen und bereitzustellen.
+  local_button: Kontakt aufnehmen
 footer:
-  text: "Linux • Open Source • Infrastructure Engineering"
-
+  text: Linux • Open Source • Infrastructure Engineering

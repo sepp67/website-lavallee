@@ -1,54 +1,131 @@
 # data/home.en.yaml
-brand_subtitle: "Open Source Infrastructure"
-
+meta:
+  title_suffix: Open Source Infrastructure
+  description: 'Self-hosted Linux infrastructure: Proxmox, Docker, Ansible, monitoring, production/staging and engineering documentation.'
+brand_subtitle: Open Source Infrastructure
 nav:
-  infrastructure: "Infrastructure"
-  projects: "Projects"
-  notes: "Engineering Notes"
-  contact: "Contact"
-
+  aria_label: Main navigation
+  infrastructure: Infrastructure
+  projects: Projects
+  notes: Engineering Notes
+  contact: Contact
+language_switch:
+  aria_label: Language switcher
 hero:
-  eyebrow: "Production Linux • Self-hosting • Automation"
-  title: "This is a<br>self-hosted production infrastructure!"
-  lead_1: "Lavallee.tech documents the design, operation and evolution of a self-hosted Linux infrastructure."
-  lead_2: "This website serves both as an engineering journal and as a public portfolio of infrastructure projects: Proxmox hosts, Docker services, Ansible automation, monitoring, reverse proxies, VPN access and open-source collaboration tools."
-  primary_button: "View infrastructure"
-  secondary_button: "Read engineering notes"
-
+  eyebrow: Production Linux • Self-hosting • Automation
+  title: This is a<br>self-hosted production infrastructure!
+  lead_1: Lavallee.tech documents the design, operation and evolution of a self-hosted Linux infrastructure.
+  lead_2: 'This website serves both as an engineering journal and as a public portfolio of infrastructure projects: Proxmox hosts, Docker services, Ansible automation, monitoring, reverse proxies, VPN access and open-source collaboration tools.'
+  primary_button: View infrastructure
+  secondary_button: Read engineering notes
+stack:
+  aria_label: Technology stack
+  items:
+  - Proxmox
+  - Debian
+  - Docker
+  - Ansible
+  - Caddy
+  - Prometheus
+  - Grafana
+  - Loki
+  - WireGuard
 terminal:
-  aria_label: "Infrastructure summary"
-  command: "ansible-playbook site-production.yml"
+  aria_label: Infrastructure summary
+  command: ansible-playbook site-production.yml
   lines:
-    - "# bootstrap Linux hosts"
-    - "# deploy Docker services"
-    - "# configure reverse proxies"
-    - "# publish monitoring targets"
-  status: "production separated from staging"
-  focus: "reliability, observability, documentation"
-  stack: "Linux, Proxmox, Docker and Ansible"
-
+  - '# bootstrap Linux hosts'
+  - '# deploy Docker services'
+  - '# configure reverse proxies'
+  - '# publish monitoring targets'
+  labels:
+    status: status
+    focus: focus
+    stack: used stack
+  status: production separated from staging
+  focus: reliability, observability, documentation
+  stack: Linux, Proxmox, Docker and Ansible
 infrastructure:
-  title: "Infrastructure architecture"
-  intro: "A real infrastructure restructuring project: separating critical production workloads from staging, lab and migration work."
-
+  title: Infrastructure architecture
+  intro: 'A real infrastructure restructuring project: separating critical production workloads from staging, lab and migration work.'
+  nodes:
+  - title: Production node
+    subtitle: Dell OptiPlex 3040 — critical services
+    items:
+    - Mail
+    - Nextcloud
+    - Matrix
+    - Reverse proxy
+  - title: Staging / Lab node
+    subtitle: Dell OptiPlex 7010 — tests and automation
+    items:
+    - Staging apps
+    - Monitoring
+    - CI/CD tests
+    - Migration work
+  - title: Operational layer
+    subtitle: Ansible, Docker, Caddy, Prometheus, Grafana, Loki, WireGuard
+  steps:
+  - title: Separate production and staging
+    text: Move from a single overloaded host to a clearer two-node Proxmox architecture with explicit operational boundaries.
+  - title: Reduce Ansible complexity
+    text: 'Split heavy playbooks into smaller repositories and roles: foundation, platform services and applications.'
+  - title: Migrate legacy services
+    text: Replace selected YunoHost services with documented Docker stacks while preserving backups and operational visibility.
+  - title: Document everything
+    text: Turn runbooks, incidents, diagrams and deployment notes into public engineering documentation.
 projects:
-  title: "Projects"
-  intro: "Selected infrastructure and application projects used to demonstrate practical Linux engineering work."
-
+  title: Projects
+  intro: Selected infrastructure and application projects used to demonstrate practical Linux engineering work.
+  cards:
+  - title: DevOps staging / production infrastructure
+    text: Infrastructure automation project for deploying applications across separated environments using Ansible, Docker and reverse proxies.
+    items:
+    - Project registry
+    - Docker image deployment
+    - Health checks
+    - Monitoring targets
+    links:
+    - label: GitHub
+      url: https://github.com/sepp67/devops_staging_prod_infra
+      primary: false
+  - title: Self-hosted collaboration stack
+    text: Migration path from YunoHost-based services to Docker-based Matrix and Nextcloud deployments.
+    items:
+    - Persistent volumes
+    - Reverse proxy integration
+    - Backups
+    - Operational runbooks
+    links:
+    - label: GitHub
+      url: https://github.com/sepp67/ansible-role-nextcloud-stack
+      primary: false
+  - title: French e-invoicing demo
+    text: Factur-X / PDP-oriented application prototype for demonstrating structured electronic invoice generation.
+    items:
+    - FastAPI
+    - Docker image publishing
+    - Factur-X generation
+    - API integration
+    links:
+    - label: Live Demo
+      url: https://facturier.lavallee.tech
+      primary: true
+    - label: GitHub
+      url: https://github.com/sepp67/ansible-role-facturier_demo
+      primary: false
 notes:
-  title: "Engineering notes"
-  intro: "Long-form notes about architecture decisions, migrations, operational incidents and infrastructure design."
-  read_button: "Read article"
-
+  title: Engineering notes
+  intro: Long-form notes about architecture decisions, migrations, operational incidents and infrastructure design.
+  read_button: Read article
 contact:
-  title: "how to work together"
-  intro: "This platform showcases my Linux engineering work, infrastructure projects and technical notes. It is intended both for recruiters and for local organizations looking for practical open-source solutions."
-  recruiter_title: "Recruiters & Technical Teams"
-  recruiter_text: "Coming from LinkedIn or GitHub? Explore my projects, technical articles and architectural decisions to understand how I design, automate and operate Linux infrastructures."
-  recruiter_button: "Explore Projects"
-  local_title: "Small Businesses & Associations"
-  local_text: "Looking for Nextcloud, VPN, Linux servers, backup solutions or open-source alternatives to cloud services? I can help design and deploy solutions that are simple, sustainable and well documented."
-  local_button: "Get in Touch"
-
+  title: How to work together
+  intro: This platform showcases my Linux engineering work, infrastructure projects and technical notes. It is intended both for recruiters and for local organizations looking for practical open-source solutions.
+  recruiter_title: Recruiters & Technical Teams
+  recruiter_text: Coming from LinkedIn or GitHub? Explore my projects, technical articles and architectural decisions to understand how I design, automate and operate Linux infrastructures.
+  recruiter_button: Explore Projects
+  local_title: Small Businesses & Associations
+  local_text: Looking for Nextcloud, VPN, Linux servers, backup solutions or open-source alternatives to cloud services? I can help design and deploy solutions that are simple, sustainable and well documented.
+  local_button: Get in Touch
 footer:
-  text: "Linux • Open Source • Infrastructure Engineering"
+  text: Linux • Open Source • Infrastructure Engineering

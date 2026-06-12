@@ -1,17 +1,19 @@
 {{ $home := index site.Data (printf "home.%s" .Site.Language.Lang) }}
+{{ if not $home }}{{ $home = index site.Data "home.en" }}{{ end }}
 <!doctype html>
 <html lang="{{ .Site.Language.Lang }}">
 
 <head>
+  <!-- # HEAD / META -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ .Site.Title }} — Open Source Infrastructure</title>
-  <meta name="description"
-    content="Self-hosted Linux infrastructure: Proxmox, Docker, Ansible, monitoring, production/staging and engineering documentation.">
+  <title>{{ .Site.Title }} — {{ $home.meta.title_suffix }}</title>
+  <meta name="description" content="{{ $home.meta.description }}">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
+  <!-- # HEADER / NAVIGATION -->
   <header>
     <div class="container nav">
       <a class="brand" href="{{ "/" | relLangURL }}" aria-label="lavallee.tech home">
@@ -19,14 +21,14 @@
         <span>{{ $home.brand_subtitle }}</span>
       </a>
 
-      <nav class="nav-links" aria-label="Main navigation">
+      <nav class="nav-links" aria-label="{{ $home.nav.aria_label }}">
         <a href="#infrastructure">{{ $home.nav.infrastructure }}</a>
         <a href="#projects">{{ $home.nav.projects }}</a>
         <a href="{{ "/articles/" | relLangURL }}">{{ $home.nav.notes }}</a>
         <a href="#contact">{{ $home.nav.contact }}</a>
       </nav>
 
-      <div class="language-switch" aria-label="Language switcher">
+      <div class="language-switch" aria-label="{{ $home.language_switch.aria_label }}">
         <a href="/en/" {{ if eq .Site.Language.Lang "en" }}class="active"{{ end }}>EN</a>
         <a href="/de/" {{ if eq .Site.Language.Lang "de" }}class="active"{{ end }}>DE</a>
         <a href="/fr/" {{ if eq .Site.Language.Lang "fr" }}class="active"{{ end }}>FR</a>
@@ -37,6 +39,7 @@
   </header>
 
   <main id="top">
+    <!-- # HERO SECTION -->
     <section class="hero">
       <div class="container hero-grid">
         <div>
@@ -51,19 +54,14 @@
             <a class="button" href="{{ "/articles/" | relLangURL }}">{{ $home.hero.secondary_button }}</a>
           </div>
 
-          <div class="stack" aria-label="Technology stack">
-            <span class="tag">Proxmox</span>
-            <span class="tag">Debian</span>
-            <span class="tag">Docker</span>
-            <span class="tag">Ansible</span>
-            <span class="tag">Caddy</span>
-            <span class="tag">Prometheus</span>
-            <span class="tag">Grafana</span>
-            <span class="tag">Loki</span>
-            <span class="tag">WireGuard</span>
+          <div class="stack" aria-label="{{ $home.stack.aria_label }}">
+            {{ range $home.stack.items }}
+            <span class="tag">{{ . }}</span>
+            {{ end }}
           </div>
         </div>
 
+        <!-- # HERO TERMINAL CARD -->
         <aside class="terminal-card" aria-label="{{ $home.terminal.aria_label }}">
           <div class="terminal-top">
             <span class="dot"></span><span class="dot"></span><span class="dot"></span>
@@ -76,14 +74,15 @@
             <p class="comment">{{ . }}</p>
             {{ end }}
 
-            <p><span class="prompt">status:</span> {{ $home.terminal.status }}</p>
-            <p><span class="prompt">focus:</span> {{ $home.terminal.focus }}</p>
-            <p><span class="prompt">used stack:</span> {{ $home.terminal.stack }}</p>
+            <p><span class="prompt">{{ $home.terminal.labels.status }}:</span> {{ $home.terminal.status }}</p>
+            <p><span class="prompt">{{ $home.terminal.labels.focus }}:</span> {{ $home.terminal.focus }}</p>
+            <p><span class="prompt">{{ $home.terminal.labels.stack }}:</span> {{ $home.terminal.stack }}</p>
           </div>
         </aside>
       </div>
     </section>
 
+    <!-- # INFRASTRUCTURE SECTION -->
     <section id="infrastructure">
       <div class="container">
         <div class="section-head">
@@ -94,75 +93,40 @@
         </div>
 
         <div class="architecture">
+          <!-- # INFRASTRUCTURE DIAGRAM / NODES -->
           <div class="diagram">
+            {{ range $home.infrastructure.nodes }}
             <div class="node">
-              <strong>Production node</strong>
-              <span>Dell OptiPlex 3040 — critical services</span>
+              <strong>{{ .title }}</strong>
+              <span>{{ .subtitle }}</span>
+              {{ with .items }}
               <div class="mini-grid">
-                <div class="mini">Mail</div>
-                <div class="mini">Nextcloud</div>
-                <div class="mini">Matrix</div>
-                <div class="mini">Reverse proxy</div>
+                {{ range . }}
+                <div class="mini">{{ . }}</div>
+                {{ end }}
               </div>
+              {{ end }}
             </div>
-
-            <div class="node">
-              <strong>Staging / Lab node</strong>
-              <span>Dell OptiPlex 7010 — tests and automation</span>
-              <div class="mini-grid">
-                <div class="mini">Staging apps</div>
-                <div class="mini">Monitoring</div>
-                <div class="mini">CI/CD tests</div>
-                <div class="mini">Migration work</div>
-              </div>
-            </div>
-
-            <div class="node">
-              <strong>Operational layer</strong>
-              <span>Ansible, Docker, Caddy, Prometheus, Grafana, Loki, WireGuard</span>
-            </div>
+            {{ end }}
           </div>
 
+          <!-- # INFRASTRUCTURE TIMELINE -->
           <div class="timeline">
+            {{ range $index, $step := $home.infrastructure.steps }}
             <div class="step">
-              <div class="number">1</div>
+              <div class="number">{{ add $index 1 }}</div>
               <div>
-                <h3>Separate production and staging</h3>
-                <p>Move from a single overloaded host to a clearer two-node Proxmox architecture with explicit
-                  operational boundaries.</p>
+                <h3>{{ $step.title }}</h3>
+                <p>{{ $step.text }}</p>
               </div>
             </div>
-
-            <div class="step">
-              <div class="number">2</div>
-              <div>
-                <h3>Reduce Ansible complexity</h3>
-                <p>Split heavy playbooks into smaller repositories and roles: foundation, platform services and
-                  applications.</p>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="number">3</div>
-              <div>
-                <h3>Migrate legacy services</h3>
-                <p>Replace selected YunoHost services with documented Docker stacks while preserving backups and
-                  operational visibility.</p>
-              </div>
-            </div>
-
-            <div class="step">
-              <div class="number">4</div>
-              <div>
-                <h3>Document everything</h3>
-                <p>Turn runbooks, incidents, diagrams and deployment notes into public engineering documentation.</p>
-              </div>
-            </div>
+            {{ end }}
           </div>
         </div>
       </div>
     </section>
 
+    <!-- # PROJECTS SECTION -->
     <section id="projects">
       <div class="container">
         <div class="section-head">
@@ -172,44 +136,37 @@
           <p>{{ $home.projects.intro }}</p>
         </div>
 
+        <!-- # PROJECT CARDS -->
         <div class="cards">
+          {{ range $home.projects.cards }}
           <article class="card">
-            <h3>DevOps staging / production infrastructure</h3>
-            <p>Infrastructure automation project for deploying applications across separated environments using Ansible,
-              Docker and reverse proxies.</p>
+            <h3>{{ .title }}</h3>
+            <p>{{ .text }}</p>
             <ul>
-              <li>Project registry</li>
-              <li>Docker image deployment</li>
-              <li>Health checks</li>
-              <li>Monitoring targets</li>
+              {{ range .items }}
+              <li>{{ . }}</li>
+              {{ end }}
             </ul>
-          </article>
 
-          <article class="card">
-            <h3>Self-hosted collaboration stack</h3>
-            <p>Migration path from YunoHost-based services to Docker-based Matrix and Nextcloud deployments.</p>
-            <ul>
-              <li>Persistent volumes</li>
-              <li>Reverse proxy integration</li>
-              <li>Backups</li>
-              <li>Operational runbooks</li>
-            </ul>
+            {{ with .links }}
+            <div class="hero-actions">
+              {{ range . }}
+              <a class="button{{ if .primary }} primary{{ end }}"
+                 href="{{ .url }}"
+                 target="_blank"
+                 rel="noopener noreferrer">
+                {{ .label }}
+              </a>
+              {{ end }}
+            </div>
+            {{ end }}
           </article>
-
-          <article class="card">
-            <h3>French e-invoicing demo</h3>
-            <p>Factur-X / PDP-oriented application prototype for demonstrating structured electronic invoice generation.</p>
-            <ul>
-              <li>FastAPI</li>
-              <li>Docker image publishing</li>
-              <li>Factur-X generation</li>
-              <li>API integration</li>
-            </ul>
-          </article>
+          {{ end }}
         </div>
       </div>
     </section>
 
+    <!-- # ENGINEERING NOTES / ARTICLES SECTION -->
     <section id="notes">
       <div class="container">
         <div class="section-head">
@@ -242,6 +199,7 @@
       </div>
     </section>
 
+    <!-- # CONTACT SECTION -->
     <section id="contact">
       <div class="container">
         <div class="contact">
@@ -268,6 +226,7 @@
     </section>
   </main>
 
+  <!-- # FOOTER -->
   <footer>
     <div class="container footer-inner">
       <span>© 2026 lavallee.tech</span>
