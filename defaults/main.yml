@@ -1,0 +1,7 @@
+---
+lavallee_image: "ghcr.io/sepp67/lavallee:latest"
+lavallee_container_name: lavallee
+lavallee_internal_port: 80
+docker_network: caddy_net
+deploy_dir: /opt/staging
+deploy_user: devops

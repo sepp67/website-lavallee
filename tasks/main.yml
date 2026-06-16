@@ -1,0 +1,26 @@
+---
+- name: Créer le répertoire de déploiement lavallee
+  ansible.builtin.file:
+    path: "{{ deploy_dir }}/lavallee"
+    state: directory
+    owner: "{{ deploy_user }}"
+    group: "{{ deploy_user }}"
+    mode: "0755"
+
+- name: Puller l'image lavallee depuis ghcr.io
+  community.docker.docker_image:
+    name: "{{ lavallee_image }}"
+    source: pull
+    force_source: true
+
+- name: Lancer le conteneur lavallee
+  community.docker.docker_container:
+    name: "{{ lavallee_container_name }}"
+    image: "{{ lavallee_image }}"
+    state: started
+    restart_policy: unless-stopped
+    networks:
+      - name: "{{ docker_network }}"
+    expose:
+      - "{{ lavallee_internal_port }}"
+  notify: Redémarrer lavallee

@@ -1,0 +1,6 @@
+---
+- name: Redémarrer lavallee
+  community.docker.docker_container:
+    name: "{{ lavallee_container_name }}"
+    state: started
+    restart: true
