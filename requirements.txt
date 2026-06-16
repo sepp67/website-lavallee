@@ -1,5 +1,0 @@
----
-roles:
-  - name: lavallee_website
-    src: git+https://github.com/sepp67/devops_staging_prod_infra/ansible-role-website-lavallee.git
-    version: main
